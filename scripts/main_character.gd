@@ -12,7 +12,9 @@ var block_wall_slide = false
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var ray_cast_left = $RayCastLeft
 @onready var ray_cast_right = $RayCastRight
+@onready var coyote_timer = $CoyoteTimer
 
+# Auxiliary functions
 func handle_animation(direction: int):
 	# Flip character
 	if direction > 0:
@@ -86,7 +88,7 @@ func _physics_process(delta):
 
 	# Handle jump
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor():
+		if is_on_floor() or not coyote_timer.is_stopped(): # Consider coyote time
 			if is_on_wall() and direction!= 0:
 				# Allow player to jump even if he's running towards a wall
 				block_wall_slide = true
@@ -113,8 +115,11 @@ func _physics_process(delta):
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y = JUMP_VELOCITY / 4
 
+	var was_on_floor = is_on_floor()
 	move_and_slide()
 	handle_animation(direction)
+	if was_on_floor and !is_on_floor():
+		coyote_timer.start()
 
 	# Handle sprite's squash and stretch effect
 	animated_sprite.scale.x = move_toward(animated_sprite.scale.x, 3, 3 * delta)
