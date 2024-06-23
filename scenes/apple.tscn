@@ -134,6 +134,7 @@ animations = [{
 radius = 17.1172
 
 [node name="Apple" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_c66ga")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
