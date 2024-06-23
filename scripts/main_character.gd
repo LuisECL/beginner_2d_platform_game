@@ -27,8 +27,10 @@ func handle_animation(direction: int):
 	if not is_on_floor():
 		if is_on_wall() and not block_wall_slide:
 			animated_sprite.play("wall_slide")
-		else:
+		elif velocity.y < 0:
 			animated_sprite.play("jump")
+		else:
+			animated_sprite.play("fall")
 	else:
 		if direction == 0:
 			animated_sprite.play("idle")
