@@ -258,7 +258,7 @@ position = Vector2(0, -38)
 target_position = Vector2(45, 0)
 
 [node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.075
 one_shot = true
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

@@ -9,6 +9,7 @@ const FALL_GRAVITY = 2400
 var was_airbourne = false
 var was_on_wall = false
 var block_wall_slide = false
+var allow_jump = true
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var ray_cast_left = $RayCastLeft
 @onready var ray_cast_right = $RayCastRight
@@ -45,7 +46,13 @@ func _physics_process(delta):
 		if was_airbourne:
 			animated_sprite.scale = Vector2(3.5, 2)
 			was_airbourne = false
+		# Always allow jump if on floor
+		allow_jump = true
+		coyote_timer.stop()
 	else:
+		# Start coyote timer
+		if allow_jump and coyote_timer.is_stopped():
+			coyote_timer.start()
 		# Add gravity.
 		velocity.y += get_gravity(velocity) * delta
 		was_airbourne = true
@@ -88,7 +95,7 @@ func _physics_process(delta):
 
 	# Handle jump
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor() or not coyote_timer.is_stopped(): # Consider coyote time
+		if is_on_floor() or allow_jump: # Consider coyote time
 			if is_on_wall() and direction!= 0:
 				# Allow player to jump even if he's running towards a wall
 				block_wall_slide = true
@@ -115,12 +122,13 @@ func _physics_process(delta):
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y = JUMP_VELOCITY / 4
 
-	var was_on_floor = is_on_floor()
 	move_and_slide()
 	handle_animation(direction)
-	if was_on_floor and !is_on_floor():
-		coyote_timer.start()
 
 	# Handle sprite's squash and stretch effect
 	animated_sprite.scale.x = move_toward(animated_sprite.scale.x, 3, 3 * delta)
 	animated_sprite.scale.y = move_toward(animated_sprite.scale.y, 3, 6 * delta)
+
+
+func _on_coyote_timer_timeout():
+	allow_jump = false
