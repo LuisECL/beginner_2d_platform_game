@@ -11,6 +11,26 @@ var was_on_wall = false
 var block_wall_slide = false
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $Timer
+@onready var ray_cast_left = $RayCastLeft
+
+func handle_animation(direction: int):
+	# Flip character
+	if direction > 0:
+		animated_sprite.flip_h = false
+	elif direction < 0:
+		animated_sprite.flip_h = true
+
+	# Play animations
+	if not is_on_floor():
+		if is_on_wall():
+			animated_sprite.play("wall_slide")
+		else:
+			animated_sprite.play("jump")
+	else:
+		if direction == 0:
+			animated_sprite.play("idle")
+		else:
+			animated_sprite.play("running")
 
 func get_gravity(velocity_param: Vector2):
 	if velocity_param.y < 0:
@@ -24,24 +44,13 @@ func _physics_process(delta):
 			animated_sprite.scale = Vector2(3.5, 2)
 			was_airbourne = false
 	else:
-		animated_sprite.play('jump')
 		velocity.y += get_gravity(velocity) * delta
 		was_airbourne = true
 	
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("left", "right")
-	# Running
-	if direction > 0:
-		animated_sprite.flip_h = false
-		animated_sprite.play("running")
-	elif direction < 0:
-		animated_sprite.flip_h = true
-		animated_sprite.play("running")
-	else:
-		animated_sprite.play("idle")
 	# Wall sliding
 	if is_on_wall() and not is_on_floor() and direction != 0 and not block_wall_slide:
-		animated_sprite.play("wall_jump")
 		velocity.y = GRAVITY / 8
 
 	# Animate sprite stretch
@@ -89,6 +98,8 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
+	# Handle sprite's animation
+	handle_animation(direction)
 	animated_sprite.scale.x = move_toward(animated_sprite.scale.x, 3, 3 * delta)
 	animated_sprite.scale.y = move_toward(animated_sprite.scale.y, 3, 6 * delta)
 
