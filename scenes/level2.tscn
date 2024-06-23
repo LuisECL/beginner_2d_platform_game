@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://ds201k6hv28n1"]
+[gd_scene load_steps=10 format=3 uid="uid://ds201k6hv28n1"]
 
-[ext_resource type="Texture2D" uid="uid://d2gifrqmxwnmr" path="res://assets/Green.png" id="1_i6cxa"]
-[ext_resource type="Texture2D" uid="uid://boraku2nrlatt" path="res://assets/Terrain (16x16).png" id="2_6tve0"]
-[ext_resource type="PackedScene" uid="uid://ctcjytfpmuhuh" path="res://scenes/main_character.tscn" id="3_5k3b3"]
-[ext_resource type="PackedScene" uid="uid://v3bfhkad1vst" path="res://scenes/killzone.tscn" id="4_hytbr"]
+[ext_resource type="Texture2D" uid="uid://d2gifrqmxwnmr" path="res://assets/Green.png" id="1_qu25o"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="2_tlif0"]
+[ext_resource type="Texture2D" uid="uid://boraku2nrlatt" path="res://assets/Terrain (16x16).png" id="3_1o1pt"]
+[ext_resource type="PackedScene" uid="uid://ctcjytfpmuhuh" path="res://scenes/main_character.tscn" id="4_k2hso"]
+[ext_resource type="PackedScene" uid="uid://v3bfhkad1vst" path="res://scenes/killzone.tscn" id="5_kxai8"]
+[ext_resource type="PackedScene" uid="uid://4g7teiwp8aq4" path="res://scenes/apple.tscn" id="6_kiq5g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a3h2n"]
-texture = ExtResource("2_6tve0")
+texture = ExtResource("3_1o1pt")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -484,8 +486,21 @@ offset_right = 64.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_i6cxa")
+texture = ExtResource("1_qu25o")
 stretch_mode = 1
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_tlif0")
+
+[node name="Score" type="Label" parent="GameManager"]
+offset_left = 163.0
+offset_top = 151.0
+offset_right = 462.0
+offset_bottom = 185.0
+theme_override_colors/font_color = Color(0.4002, 0.58, 0.412187, 1)
+theme_override_font_sizes/font_size = 24
+text = "You've collected 0 apples."
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -494,7 +509,7 @@ tile_set = SubResource("TileSet_tyw06")
 format = 2
 layer_0/tile_data = PackedInt32Array(786432, 458752, 0, 786433, 458752, 0, 786434, 458752, 0, 786435, 458752, 0, 786436, 458752, 0, 786437, 458752, 0, 786438, 458752, 0, 786439, 524288, 0, 786443, 393216, 0, 786444, 458752, 0, 786445, 458752, 0, 786446, 458752, 0, 786447, 458752, 0, 786448, 458752, 0, 786449, 458752, 0, 786450, 458752, 0, 786451, 458752, 0, 786452, 458752, 0, 786453, 458752, 0, 786454, 458752, 0, 786455, 458752, 0, 851968, 458752, 1, 851969, 458752, 1, 851970, 458752, 1, 851971, 458752, 1, 851972, 458752, 1, 851973, 458752, 1, 851974, 458752, 1, 851975, 524288, 1, 851979, 393216, 1, 851980, 458752, 1, 851981, 458752, 1, 851982, 458752, 1, 851983, 458752, 1, 851984, 458752, 1, 851985, 458752, 1, 851986, 458752, 1, 851987, 458752, 1, 851988, 458752, 1, 851989, 458752, 1, 851990, 458752, 1, 851991, 458752, 1, 851967, 524288, 1, 917503, 524288, 1, 720915, 393216, 1, 720916, 458752, 1, 720917, 524288, 1, 655379, 393216, 1, 655380, 458752, 1, 655381, 524288, 1, 589843, 393216, 1, 589844, 458752, 1, 589845, 524288, 1, 524307, 393216, 0, 524308, 458752, 0, 524309, 524288, 0, 131091, 393216, 0, 196627, 393216, 1, 262163, 393216, 2, 131092, 458752, 0, 196628, 458752, 1, 262164, 458752, 2, 131093, 524288, 0, 196629, 524288, 1, 262165, 524288, 2, 327694, 458752, 0, 393230, 458752, 1, 458766, 458752, 2, 327695, 524288, 0, 393231, 524288, 1, 458767, 524288, 2, 327693, 393216, 0, 393229, 393216, 1, 458765, 393216, 2, 917511, 524288, 1, 983047, 524288, 1, 917515, 393216, 1, 983051, 393216, 1, 983039, 458752, 1, 1048575, 458752, 1, 917504, 458752, 1, 983040, 458752, 1, 917505, 458752, 1, 983041, 458752, 1, 917506, 458752, 1, 983042, 458752, 1, 917507, 458752, 1, 983043, 458752, 1, 917508, 458752, 1, 983044, 458752, 1, 917509, 458752, 1, 983045, 458752, 1, 917510, 458752, 1, 983046, 458752, 1, 917516, 458752, 1, 983052, 458752, 1, 917517, 458752, 1, 983053, 458752, 1, 917518, 458752, 1, 983054, 458752, 1, 917519, 458752, 1, 983055, 458752, 1, 917520, 458752, 1, 983056, 458752, 1, 917521, 458752, 1, 983057, 458752, 1, 917522, 458752, 1, 983058, 458752, 1, 917523, 458752, 1, 983059, 458752, 1, 917524, 458752, 1, 983060, 458752, 1, 917525, 458752, 1, 983061, 458752, 1, 917526, 458752, 1, 983062, 458752, 1, 917527, 458752, 1, 983063, 458752, 1, 524287, 524288, 1, 589823, 524288, 1, 655359, 524288, 1, 720895, 524288, 1, 786431, 524288, 1, 65535, 524288, 1, 131071, 524288, 1, 196607, 524288, 1, 262143, 524288, 1, 327679, 524288, 1, 393215, 524288, 1, 458751, 524288, 1, -1, 458752, 2, -65536, 458752, 2, -65535, 458752, 2, -65534, 458752, 2, -65533, 458752, 2, -65532, 458752, 2, -65531, 458752, 2, -65530, 458752, 2, -65529, 458752, 2)
 
-[node name="MainCharacter" parent="." instance=ExtResource("3_5k3b3")]
+[node name="MainCharacter" parent="." instance=ExtResource("4_k2hso")]
 position = Vector2(95, 577)
 
 [node name="Camera2D" type="Camera2D" parent="MainCharacter"]
@@ -504,9 +519,26 @@ limit_bottom = 670
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
-[node name="Killzone" parent="." instance=ExtResource("4_hytbr")]
+[node name="Killzone" parent="." instance=ExtResource("5_kxai8")]
 position = Vector2(457, 736)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(0, 116)
 shape = SubResource("WorldBoundaryShape2D_rbxgp")
+
+[node name="Apples" type="Node" parent="."]
+
+[node name="Apple" parent="Apples" instance=ExtResource("6_kiq5g")]
+position = Vector2(456, 464)
+
+[node name="Apple2" parent="Apples" instance=ExtResource("6_kiq5g")]
+position = Vector2(752, 545)
+
+[node name="Apple3" parent="Apples" instance=ExtResource("6_kiq5g")]
+position = Vector2(985, 354)
+
+[node name="Apple4" parent="Apples" instance=ExtResource("6_kiq5g")]
+position = Vector2(698, 207)
+
+[node name="Apple5" parent="Apples" instance=ExtResource("6_kiq5g")]
+position = Vector2(985, 63)
