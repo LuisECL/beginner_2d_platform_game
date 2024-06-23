@@ -35,6 +35,47 @@ func handle_animation(direction: int):
 		else:
 			animated_sprite.play("running")
 
+func handle_movement(direction: int):
+	if was_on_wall:
+		# Allow for pushback when wall jumping
+		if direction < 0 and ray_cast_left.is_colliding():
+			pass
+		elif direction > 0 and ray_cast_right.is_colliding():
+			pass
+		else:
+			# To allow movement again once player is far away enough from wall
+			was_on_wall = false
+	else:
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, 30) # Slide after stopping
+
+func handle_jump(direction: int):
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor() or allow_jump: # Consider coyote time
+			if is_on_wall() and direction!= 0:
+				# Allow player to jump even if he's running towards a wall
+				block_wall_slide = true
+				velocity.y = JUMP_VELOCITY
+			else:
+				# Jump normally
+				velocity.y = JUMP_VELOCITY
+		elif is_on_wall():
+			if direction < 0:
+				was_on_wall = true
+				#timer.start()
+				velocity.y = WALL_JUMP_VELOCITY
+				velocity.x = SPEED
+			elif direction > 0:
+				was_on_wall = true
+				#timer.start()
+				velocity.y = WALL_JUMP_VELOCITY
+				velocity.x = -SPEED
+		else:
+			# Future for double jump feature
+			pass
+
 func get_gravity(velocity_param: Vector2):
 	if velocity_param.y < 0:
 		return GRAVITY
@@ -59,7 +100,7 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("left", "right")
-	# Wall sliding
+	# Wall slide at a constant and lower speed
 	if is_on_wall() and not is_on_floor() and direction != 0 and not block_wall_slide:
 		velocity.y = float(GRAVITY) / 8
 
@@ -68,20 +109,7 @@ func _physics_process(delta):
 		animated_sprite.scale = Vector2(2.8, 3.5)
 
 	# Handle movement
-	if was_on_wall:
-		# Allow for pushback when wall jumping
-		if direction < 0 and ray_cast_left.is_colliding():
-			pass
-		elif direction > 0 and ray_cast_right.is_colliding():
-			pass
-		else:
-			# To allow movement again once player is far away enough from wall
-			was_on_wall = false
-	else:
-		if direction:
-			velocity.x = direction * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, 30)
+	handle_movement(direction)
 
 	# Allow player to jump normally even if jumping while bumping a wall
 	if is_on_floor() and is_on_wall() and direction != 0:
@@ -89,34 +117,8 @@ func _physics_process(delta):
 	if velocity.y > 0:
 		block_wall_slide = false
 
-	# To allow push back time when wall jumping
-	if is_on_floor():
-		was_on_wall = false
-
 	# Handle jump
-	if Input.is_action_just_pressed("jump"):
-		if is_on_floor() or allow_jump: # Consider coyote time
-			if is_on_wall() and direction!= 0:
-				# Allow player to jump even if he's running towards a wall
-				block_wall_slide = true
-				velocity.y = JUMP_VELOCITY
-			else:
-				# Jump normally
-				velocity.y = JUMP_VELOCITY
-		elif is_on_wall():
-			if direction < 0:
-				was_on_wall = true
-				#timer.start()
-				velocity.y = WALL_JUMP_VELOCITY
-				velocity.x = SPEED
-			elif direction > 0:
-				was_on_wall = true
-				#timer.start()
-				velocity.y = WALL_JUMP_VELOCITY
-				velocity.x = -SPEED
-		else:
-			# Future for double jump feature
-			pass
+	handle_jump(direction)
 
 	# Fall at a greater speed
 	if Input.is_action_just_released("jump") and velocity.y < 0:
