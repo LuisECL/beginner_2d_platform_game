@@ -1,6 +1,6 @@
 extends Area2D
-@onready var game_manager = %GameManager
+@onready var level_manager = %LevelManager
 
 func _on_body_entered(_body):
-	game_manager.increase_score()
+	level_manager.increase_score()
 	queue_free()
