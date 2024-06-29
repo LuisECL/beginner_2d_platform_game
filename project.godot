@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Coco Code Tutorial"
-run/main_scene="res://scenes/level2.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scripts/game_manager.gd"
 
 [display]
 

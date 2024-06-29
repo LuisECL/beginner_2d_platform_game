@@ -6,6 +6,10 @@ const MAX_SCORE = 10
 @onready var level_end = %LevelEnd
 @onready var apple_count = %AppleCount
 
+func _ready():
+	GameManager.power_ups.wall_jump = true
+	GameManager.available_levels.append(2)
+
 func increase_score():
 	score += 1
 	apple_count.text = str(score)

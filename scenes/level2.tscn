@@ -625,15 +625,14 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Label2" type="Label" parent="Instructions"]
-offset_left = 771.0
-offset_top = 301.0
-offset_right = 926.0
-offset_bottom = 336.0
+offset_left = 782.0
+offset_top = 294.0
+offset_right = 949.0
+offset_bottom = 348.0
 theme_override_colors/font_color = Color(0.290196, 0.458824, 0.223529, 1)
 theme_override_fonts/font = ExtResource("8_l70d2")
 theme_override_font_sizes/font_size = 16
-text = "You can wall jump"
-horizontal_alignment = 1
+text = "You can wall jump now!"
 vertical_alignment = 1
 autowrap_mode = 2
 

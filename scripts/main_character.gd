@@ -25,7 +25,7 @@ func handle_animation(direction: int):
 
 	# Play animations
 	if not is_on_floor():
-		if is_on_wall() and not block_wall_slide:
+		if is_on_wall() and not block_wall_slide and GameManager.power_ups.wall_jump:
 			animated_sprite.play("wall_slide")
 		elif velocity.y < 0:
 			animated_sprite.play("jump")
@@ -63,7 +63,7 @@ func handle_jump(direction: int):
 			else:
 				# Jump normally
 				velocity.y = JUMP_VELOCITY
-		elif is_on_wall():
+		elif is_on_wall() and GameManager.power_ups.wall_jump:
 			if direction < 0:
 				was_on_wall = true
 				#timer.start()
@@ -103,7 +103,7 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("left", "right")
 	# Wall slide at a constant and lower speed
-	if is_on_wall() and not is_on_floor() and direction != 0 and not block_wall_slide:
+	if is_on_wall() and not is_on_floor() and direction != 0 and not block_wall_slide and GameManager.power_ups.wall_jump:
 		velocity.y = float(GRAVITY) / 8
 
 	# Animate sprite stretch
