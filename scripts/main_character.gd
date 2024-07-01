@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -600.0
-const WALL_JUMP_VELOCITY = JUMP_VELOCITY * 1.5
+const WALL_JUMP_VELOCITY = JUMP_VELOCITY * 1.25
 const WALL_JUMP_PUSHBACK = 1000
 const GRAVITY = 1600
 const FALL_GRAVITY = 2400
@@ -66,12 +66,10 @@ func handle_jump(direction: int):
 		elif is_on_wall() and GameManager.power_ups.wall_jump:
 			if direction < 0:
 				was_on_wall = true
-				#timer.start()
 				velocity.y = WALL_JUMP_VELOCITY
 				velocity.x = SPEED
 			elif direction > 0:
 				was_on_wall = true
-				#timer.start()
 				velocity.y = WALL_JUMP_VELOCITY
 				velocity.x = -SPEED
 		else:
@@ -126,8 +124,8 @@ func _physics_process(delta):
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y = JUMP_VELOCITY / 4
 
-	move_and_slide()
 	handle_animation(direction)
+	move_and_slide()
 
 	# Handle sprite's squash and stretch effect
 	animated_sprite.scale.x = move_toward(animated_sprite.scale.x, 3, 3 * delta)

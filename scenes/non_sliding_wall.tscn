@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw35f0cpt32xs"]
+
+[ext_resource type="Script" path="res://scripts/non_sliding_wall.gd" id="1_ck0ef"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4pe5"]
+size = Vector2(20, 191)
+
+[node name="NonSlidingWall" type="Area2D"]
+position = Vector2(8, 8)
+collision_mask = 2
+script = ExtResource("1_ck0ef")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, -8)
+shape = SubResource("RectangleShape2D_r4pe5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

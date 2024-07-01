@@ -1,6 +1,7 @@
 extends Area2D
 
-
+func reload_level():
+	get_tree().reload_current_scene()
 
 func _on_body_entered(_body):
-	get_tree().reload_current_scene()
+	call_deferred("reload_level")

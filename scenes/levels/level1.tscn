@@ -9,7 +9,7 @@
 [ext_resource type="FontFile" uid="uid://op8ilp5s308v" path="res://assets/fonts/PixelOperator8.ttf" id="6_l1sol"]
 [ext_resource type="PackedScene" uid="uid://4g7teiwp8aq4" path="res://scenes/apple.tscn" id="6_u7ext"]
 [ext_resource type="PackedScene" uid="uid://c2mcvabsoqyfg" path="res://scenes/platform_static.tscn" id="7_yr2pr"]
-[ext_resource type="PackedScene" uid="uid://b6jgu1c53kfp1" path="res://scenes/level2.tscn" id="10_ii27g"]
+[ext_resource type="PackedScene" uid="uid://b6jgu1c53kfp1" path="res://scenes/levels/level2.tscn" id="10_ii27g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a3h2n"]
 texture = ExtResource("3_by5hf")
