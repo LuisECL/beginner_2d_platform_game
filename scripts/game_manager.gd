@@ -1,7 +1,7 @@
 extends Node
 
 @export var power_ups = {
-	"wall_jump": false,
+	"wall_jump": false, # True for testing purposes
 	"double_jump": false,
 	"dash": false,
 	"attack": false,

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/non_sliding_wall.gd" id="1_ck0ef"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r4pe5"]
-size = Vector2(20, 191)
+size = Vector2(88, 191)
 
 [node name="NonSlidingWall" type="Area2D"]
 position = Vector2(8, 8)

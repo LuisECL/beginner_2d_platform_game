@@ -51,7 +51,7 @@ func handle_movement(direction: int):
 		if direction:
 			velocity.x = direction * SPEED
 		else:
-			velocity.x = move_toward(velocity.x, 0, 30) # Slide after stopping
+			velocity.x = move_toward(velocity.x, 0, 50) # Slide after stopping
 
 func handle_jump(direction: int):
 	if Input.is_action_just_pressed("jump"):
