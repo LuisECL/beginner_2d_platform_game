@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c07ac5bbn1aw3" path="res://scenes/levels/level3.tscn" id="9_3qjve"]
 [ext_resource type="PackedScene" uid="uid://bw2rla8mrpaqj" path="res://scenes/level_end.tscn" id="9_ccojr"]
 [ext_resource type="PackedScene" uid="uid://de5myudg782uc" path="res://scenes/platform_moving.tscn" id="11_s7seb"]
-[ext_resource type="PackedScene" uid="uid://c2mcvabsoqyfg" path="res://scenes/platform_static.tscn" id="12_j5kwa"]
+[ext_resource type="PackedScene" uid="uid://bm1ce0mq5vbtc" path="res://scenes/platform_static.tscn" id="12_j5kwa"]
 [ext_resource type="Texture2D" uid="uid://btg35v75lwlax" path="res://assets/pickups/Apple_single.png" id="13_uxplu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a3h2n"]
@@ -653,6 +653,7 @@ autowrap_mode = 2
 unique_name_in_owner = true
 position = Vector2(2085, 190)
 target_level = ExtResource("9_3qjve")
+unlock_level = 2
 
 [node name="Platforms" type="Node" parent="."]
 

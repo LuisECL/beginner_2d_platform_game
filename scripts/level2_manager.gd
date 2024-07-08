@@ -8,7 +8,6 @@ const MAX_SCORE = 10
 
 func _ready():
 	GameManager.power_ups.wall_jump = true
-	GameManager.available_levels.append(2)
 
 func increase_score():
 	score += 1

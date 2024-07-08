@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ctcjytfpmuhuh" path="res://scenes/main_character.tscn" id="4_w301u"]
 [ext_resource type="FontFile" uid="uid://op8ilp5s308v" path="res://assets/fonts/PixelOperator8.ttf" id="6_l1sol"]
 [ext_resource type="PackedScene" uid="uid://4g7teiwp8aq4" path="res://scenes/apple.tscn" id="6_u7ext"]
-[ext_resource type="PackedScene" uid="uid://c2mcvabsoqyfg" path="res://scenes/platform_static.tscn" id="7_yr2pr"]
+[ext_resource type="PackedScene" uid="uid://bm1ce0mq5vbtc" path="res://scenes/platform_static.tscn" id="7_yr2pr"]
 [ext_resource type="PackedScene" uid="uid://b6jgu1c53kfp1" path="res://scenes/levels/level2.tscn" id="10_ii27g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a3h2n"]
@@ -495,6 +495,7 @@ stretch_mode = 1
 unique_name_in_owner = true
 position = Vector2(74, 192)
 target_level = ExtResource("10_ii27g")
+unlock_level = 1
 
 [node name="LevelManager" type="Node" parent="."]
 unique_name_in_owner = true
