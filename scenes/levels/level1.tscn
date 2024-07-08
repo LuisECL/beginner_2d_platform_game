@@ -496,6 +496,7 @@ unique_name_in_owner = true
 position = Vector2(74, 192)
 target_level = ExtResource("10_ii27g")
 unlock_level = 1
+unlock_powerup = "wall_jump"
 
 [node name="LevelManager" type="Node" parent="."]
 unique_name_in_owner = true

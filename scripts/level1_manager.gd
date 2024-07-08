@@ -5,9 +5,6 @@ const MAX_SCORE = 5
 @onready var score_label = $Score
 @onready var level_end = %LevelEnd
 
-#func on_ready():
-	#level_end.set_collision_mask_value(3)
-
 func increase_score():
 	score += 1
 
