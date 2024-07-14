@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://jcnfs5at6qtj"]
 
 [ext_resource type="Texture2D" uid="uid://ckgqi3flrtefs" path="res://assets/traps/spikes.png" id="1_jyfpt"]
-[ext_resource type="PackedScene" uid="uid://v3bfhkad1vst" path="res://scenes/killzone.tscn" id="2_p1o6p"]
+[ext_resource type="PackedScene" uid="uid://v3bfhkad1vst" path="res://scenes/game_elements/killzone.tscn" id="2_p1o6p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oehcr"]
 size = Vector2(185, 19)

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -600.0
@@ -10,10 +11,18 @@ var was_airbourne = false
 var was_on_wall = false
 var block_wall_slide = false
 var allow_jump = true
+@export var got_hit = false
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var ray_cast_left = $RayCastLeft
 @onready var ray_cast_right = $RayCastRight
 @onready var coyote_timer = $CoyoteTimer
+
+func bounce_off():
+	velocity.y = JUMP_VELOCITY
+	
+func jump_away(x):
+	velocity.y = JUMP_VELOCITY
+	velocity.x = x
 
 # Auxiliary functions
 func handle_animation(direction: int):
@@ -25,7 +34,9 @@ func handle_animation(direction: int):
 
 	# Play animations
 	if not is_on_floor():
-		if is_on_wall() and not block_wall_slide and GameManager.power_ups.wall_jump:
+		if got_hit:
+			animated_sprite.play("hit")
+		elif is_on_wall() and not block_wall_slide and GameManager.power_ups.wall_jump:
 			animated_sprite.play("wall_slide")
 		elif velocity.y < 0:
 			animated_sprite.play("jump")
@@ -55,6 +66,10 @@ func handle_movement(direction: int):
 
 func handle_jump(direction: int):
 	if Input.is_action_just_pressed("jump"):
+		# Reset 'got_hit'
+		if got_hit and (is_on_floor() or was_on_wall):
+			got_hit = false
+		# Perform jump from the floor
 		if is_on_floor() or allow_jump: # Consider coyote time
 			if is_on_wall() and direction!= 0:
 				# Allow player to jump even if he's running towards a wall
@@ -63,6 +78,7 @@ func handle_jump(direction: int):
 			else:
 				# Jump normally
 				velocity.y = JUMP_VELOCITY
+		# Perform wall jump
 		elif is_on_wall() and GameManager.power_ups.wall_jump:
 			if direction < 0:
 				was_on_wall = true
