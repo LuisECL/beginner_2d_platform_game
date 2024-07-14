@@ -1,5 +1,6 @@
 extends RigidBody2D
 @onready var level_manager = %LevelManager
+@onready var animated_sprite = $AnimatedSprite2D
 
 ## Called when the node enters the scene tree for the first time.
 #func _ready():
@@ -9,6 +10,11 @@ extends RigidBody2D
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 	#pass
+
+func face_left():
+	animated_sprite.flip_h = false
+func face_right():
+	animated_sprite.flip_h = true
 
 func _on_hit_zone_body_entered(body):
 	var y_delta = position.y - body.position.y

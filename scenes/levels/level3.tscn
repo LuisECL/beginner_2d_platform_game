@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://ctcjytfpmuhuh" path="res://scenes/characters/main_character.tscn" id="5_kp2tc"]
 [ext_resource type="PackedScene" uid="uid://4g7teiwp8aq4" path="res://scenes/game_elements/apple.tscn" id="5_pnppm"]
 [ext_resource type="PackedScene" uid="uid://v3bfhkad1vst" path="res://scenes/game_elements/killzone.tscn" id="6_cjqod"]
+[ext_resource type="PackedScene" uid="uid://js4au2cos1bu" path="res://scenes/levels/level4.tscn" id="7_1c6w2"]
 [ext_resource type="FontFile" uid="uid://op8ilp5s308v" path="res://assets/fonts/PixelOperator8.ttf" id="8_nc7se"]
 [ext_resource type="PackedScene" uid="uid://bw2rla8mrpaqj" path="res://scenes/game_elements/level_end.tscn" id="9_ls0fp"]
 [ext_resource type="PackedScene" uid="uid://jcnfs5at6qtj" path="res://scenes/traps/spikes.tscn" id="9_qnxog"]
-[ext_resource type="PackedScene" uid="uid://cg8hol4n6bcs5" path="res://scenes/menu/main_menu.tscn" id="10_oh6w7"]
 [ext_resource type="PackedScene" uid="uid://de5myudg782uc" path="res://scenes/game_elements/platform_moving.tscn" id="11_vcvhj"]
 [ext_resource type="PackedScene" uid="uid://dw35f0cpt32xs" path="res://scenes/game_elements/non_sliding_wall.tscn" id="12_4sqyg"]
 [ext_resource type="PackedScene" uid="uid://bm1ce0mq5vbtc" path="res://scenes/game_elements/platform_static.tscn" id="12_8vrf3"]
@@ -752,8 +752,8 @@ autowrap_mode = 2
 [node name="LevelEnd" parent="." instance=ExtResource("9_ls0fp")]
 unique_name_in_owner = true
 position = Vector2(2259, 2)
-target_level = ExtResource("10_oh6w7")
-unlock_level = 3
+target_level = ExtResource("7_1c6w2")
+unlock_level = 4
 
 [node name="Traps" type="Node" parent="."]
 
