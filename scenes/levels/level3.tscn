@@ -754,6 +754,7 @@ unique_name_in_owner = true
 position = Vector2(2259, 2)
 target_level = ExtResource("7_1c6w2")
 unlock_level = 4
+unlock_powerup = "double_jump"
 
 [node name="Traps" type="Node" parent="."]
 

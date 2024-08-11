@@ -11,6 +11,7 @@ var was_airbourne = false
 var was_on_wall = false
 var block_wall_slide = false
 var allow_jump = true
+var allow_double_jump = true
 @export var got_hit = false
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var ray_cast_left = $RayCastLeft
@@ -19,7 +20,7 @@ var allow_jump = true
 
 func bounce_off():
 	velocity.y = JUMP_VELOCITY
-	
+
 func jump_away(x):
 	velocity.y = JUMP_VELOCITY
 	velocity.x = x
@@ -36,6 +37,8 @@ func handle_animation(direction: int):
 	if not is_on_floor():
 		if got_hit:
 			animated_sprite.play("hit")
+		elif not allow_double_jump:
+			animated_sprite.play("double_jump")
 		elif is_on_wall() and not block_wall_slide and GameManager.power_ups.wall_jump:
 			animated_sprite.play("wall_slide")
 		elif velocity.y < 0:
@@ -49,6 +52,9 @@ func handle_animation(direction: int):
 			animated_sprite.play("running")
 
 func handle_movement(direction: int):
+	if is_on_floor() or is_on_wall():
+		# Reset 'allow_double_jump' for movement and animation purposes
+		allow_double_jump = true
 	if was_on_wall:
 		# Allow for pushback when wall jumping
 		if direction < 0 and ray_cast_left.is_colliding():
@@ -88,8 +94,11 @@ func handle_jump(direction: int):
 				was_on_wall = true
 				velocity.y = WALL_JUMP_VELOCITY
 				velocity.x = -SPEED
+		elif not is_on_floor() and GameManager.power_ups.double_jump and allow_double_jump:
+			velocity.y = JUMP_VELOCITY
+			allow_double_jump = false
+			pass
 		else:
-			# Future for double jump feature
 			pass
 
 func get_gravity(velocity_param: Vector2):
